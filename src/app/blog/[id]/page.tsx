@@ -1,5 +1,5 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowLeft,
   Calendar,
@@ -11,13 +11,14 @@ import {
   Facebook,
   Twitter,
   Instagram,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Textarea } from "@/components/ui/textarea"
-import { Input } from "@/components/ui/input"
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import Sidebar from "@/components/sidebar/Sidebar";
 
 // Mock data - in a real app, this would come from a database
 const getBlogPost = (id: string) => {
@@ -55,7 +56,7 @@ const getBlogPost = (id: string) => {
       `,
       author: {
         name: "Robert Sunmary",
-        avatar: "/placeholder.svg?height=50&width=50",
+        avatar: "/1.png",
         bio: "Fashion journalist and style consultant with over 10 years of experience in the industry.",
       },
       publishedAt: "15 Jan, 2024",
@@ -64,7 +65,7 @@ const getBlogPost = (id: string) => {
       likes: 156,
       category: "Fashion",
       tags: ["Fashion", "Style", "Trends", "Lifestyle"],
-      featuredImage: "/placeholder.svg?height=400&width=800",
+      featuredImage: "/1.png",
     },
     "2": {
       id: "2",
@@ -93,7 +94,7 @@ const getBlogPost = (id: string) => {
       `,
       author: {
         name: "Dr. Sarah Johnson",
-        avatar: "/placeholder.svg?height=50&width=50",
+        avatar: "/2.png",
         bio: "Dermatologist and skincare expert specializing in anti-aging and acne treatments.",
       },
       publishedAt: "12 Jan, 2024",
@@ -104,16 +105,16 @@ const getBlogPost = (id: string) => {
       tags: ["Beauty", "Skincare", "Health", "Wellness"],
       featuredImage: "/placeholder.svg?height=400&width=800",
     },
-  }
+  };
 
-  return posts[id as keyof typeof posts] || posts["1"]
-}
+  return posts[id as keyof typeof posts] || posts["1"];
+};
 
 const getRelatedPosts = () => [
   {
     id: "3",
     title: "Wellness Nourishing Mind, Body, and Soul Trends",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/1.png",
     category: "Health",
     author: "Dr. Michael Chen",
     publishedAt: "10 Jan, 2024",
@@ -121,7 +122,7 @@ const getRelatedPosts = () => [
   {
     id: "4",
     title: "Speed Run Secrets: Achieving Record Times",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/2.png",
     category: "Gaming",
     author: "Alex Rodriguez",
     publishedAt: "08 Jan, 2024",
@@ -129,16 +130,20 @@ const getRelatedPosts = () => [
   {
     id: "5",
     title: "Digital Digest Weekly Tech Updates",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/3.png",
     category: "Tech",
     author: "Jennifer Kim",
     publishedAt: "05 Jan, 2024",
   },
-]
+];
 
-export default function BlogDetailsPage({ params }: { params: { id: string } }) {
-  const post = getBlogPost(params.id)
-  const relatedPosts = getRelatedPosts()
+export default function BlogDetailsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const post = getBlogPost(params.id);
+  const relatedPosts = getRelatedPosts();
 
   return (
     <div className="min-h-screen bg-white">
@@ -151,25 +156,46 @@ export default function BlogDetailsPage({ params }: { params: { id: string } }) 
                 ZORIK
               </Link>
               <nav className="hidden lg:flex space-x-6">
-                <Link href="#" className="text-sm font-medium hover:text-blue-600">
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:text-blue-600"
+                >
                   GADGET
                 </Link>
-                <Link href="#" className="text-sm font-medium hover:text-blue-600">
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:text-blue-600"
+                >
                   LIFE STYLE
                 </Link>
-                <Link href="#" className="text-sm font-medium hover:text-blue-600">
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:text-blue-600"
+                >
                   FOOD
                 </Link>
-                <Link href="#" className="text-sm font-medium hover:text-blue-600">
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:text-blue-600"
+                >
                   TRAVEL
                 </Link>
-                <Link href="#" className="text-sm font-medium hover:text-blue-600">
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:text-blue-600"
+                >
                   GAMING
                 </Link>
-                <Link href="#" className="text-sm font-medium hover:text-blue-600">
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:text-blue-600"
+                >
                   POST FEATURES
                 </Link>
-                <Link href="#" className="text-sm font-medium hover:text-blue-600">
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:text-blue-600"
+                >
                   CONTACT
                 </Link>
               </nav>
@@ -190,243 +216,260 @@ export default function BlogDetailsPage({ params }: { params: { id: string } }) 
 
       {/* Back Navigation */}
       <div className="container mx-auto px-4 py-4">
-        <Link href="/" className="flex items-center space-x-2 text-gray-600 hover:text-gray-900">
+        <Link
+          href="/"
+          className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+        >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Home</span>
         </Link>
       </div>
 
-      {/* Article Header */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-6">
-            <Badge
-              className={`mb-4 ${post.category === "Fashion" ? "bg-teal-500" : post.category === "Beauty" ? "bg-pink-500" : "bg-blue-500"}`}
-            >
-              {post.category}
-            </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
-
-            <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-6">
-              <div className="flex items-center space-x-2">
-                <User className="h-4 w-4" />
-                <span>{post.author.name}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Calendar className="h-4 w-4" />
-                <span>{post.publishedAt}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Eye className="h-4 w-4" />
-                <span>{post.views} views</span>
-              </div>
-              <span>{post.readTime}</span>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <Button variant="outline" size="sm" className="flex items-center space-x-2 bg-transparent">
-                  <Heart className="h-4 w-4" />
-                  <span>{post.likes}</span>
-                </Button>
-                <Button variant="outline" size="sm" className="flex items-center space-x-2 bg-transparent">
-                  <Share2 className="h-4 w-4" />
-                  <span>Share</span>
-                </Button>
-              </div>
-              <div className="flex space-x-2">
-                {post.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
-                    {tag}
+ <div className="container mx-auto px-4 py-8">
+        <div className="grid lg:grid-cols-4 gap-8">
+          {/* Main Content */}
+          <div className="lg:col-span-3">
+           <div className="mb-6">
+                  <Badge
+                    className={`mb-4 ${
+                      post.category === "Fashion"
+                        ? "bg-teal-500"
+                        : post.category === "Beauty"
+                        ? "bg-pink-500"
+                        : "bg-blue-500"
+                    }`}
+                  >
+                    {post.category}
                   </Badge>
-                ))}
-              </div>
-            </div>
-          </div>
+                  <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                    {post.title}
+                  </h1>
 
-          {/* Featured Image */}
-          <div className="relative h-96 md:h-[500px] rounded-lg overflow-hidden mb-8">
-            <Image src={post.featuredImage || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
-          </div>
+                  <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-6">
+                    <div className="flex items-center space-x-2">
+                      <User className="h-4 w-4" />
+                      <span>{post.author.name}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="h-4 w-4" />
+                      <span>{post.publishedAt}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Eye className="h-4 w-4" />
+                      <span>{post.views} views</span>
+                    </div>
+                    <span>{post.readTime}</span>
+                  </div>
 
-          {/* Article Content */}
-          <div className="grid lg:grid-cols-4 gap-8">
-            <div className="lg:col-span-3">
-              <div className="prose prose-lg max-w-none mb-12" dangerouslySetInnerHTML={{ __html: post.content }} />
-
-              {/* Author Bio */}
-              <Card className="p-6 mb-8">
-                <div className="flex items-start space-x-4">
-                  <Avatar className="h-16 w-16">
-                    <AvatarImage src={post.author.avatar || "/placeholder.svg"} alt={post.author.name} />
-                    <AvatarFallback>
-                      {post.author.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-lg mb-2">About {post.author.name}</h3>
-                    <p className="text-gray-600 mb-4">{post.author.bio}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex items-center space-x-2 bg-transparent"
+                      >
+                        <Heart className="h-4 w-4" />
+                        <span>{post.likes}</span>
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex items-center space-x-2 bg-transparent"
+                      >
+                        <Share2 className="h-4 w-4" />
+                        <span>Share</span>
+                      </Button>
+                    </div>
                     <div className="flex space-x-2">
-                      <Button variant="outline" size="sm">
-                        Follow
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Twitter className="h-4 w-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Instagram className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-
-              {/* Comments Section */}
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold mb-6 flex items-center">
-                  <MessageCircle className="h-6 w-6 mr-2" />
-                  Comments (12)
-                </h3>
-
-                {/* Comment Form */}
-                <Card className="p-6 mb-6">
-                  <h4 className="font-semibold mb-4">Leave a Comment</h4>
-                  <div className="space-y-4">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <Input placeholder="Your Name" />
-                      <Input placeholder="Your Email" type="email" />
-                    </div>
-                    <Textarea placeholder="Write your comment here..." rows={4} />
-                    <Button className="bg-blue-600 hover:bg-blue-700">Post Comment</Button>
-                  </div>
-                </Card>
-
-                {/* Sample Comments */}
-                <div className="space-y-6">
-                  <div className="flex space-x-4">
-                    <Avatar>
-                      <AvatarImage src="/placeholder.svg?height=40&width=40" />
-                      <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <span className="font-semibold">John Doe</span>
-                        <span className="text-sm text-gray-500">2 hours ago</span>
-                      </div>
-                      <p className="text-gray-700 mb-2">
-                        Great article! I&apos;ve been struggling with my skincare routine and this really helped clarify
-                        things for me.
-                      </p>
-                      <Button variant="ghost" size="sm" className="text-blue-600">
-                        Reply
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <Avatar>
-                      <AvatarImage src="/placeholder.svg?height=40&width=40" />
-                      <AvatarFallback>SM</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <span className="font-semibold">Sarah Miller</span>
-                        <span className="text-sm text-gray-500">5 hours ago</span>
-                      </div>
-                      <p className="text-gray-700 mb-2">
-                        Love the sustainable fashion tips! It&apos;s so important to be mindful of our choices.
-                      </p>
-                      <Button variant="ghost" size="sm" className="text-blue-600">
-                        Reply
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4 ml-12">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage src="/placeholder.svg?height=32&width=32" />
-                      <AvatarFallback>RS</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <span className="font-semibold text-sm">Robert Sunmary</span>
-                        <Badge variant="secondary" className="text-xs">
-                          Author
+                      {post.tags.map((tag) => (
+                        <Badge
+                          key={tag}
+                          variant="secondary"
+                          className="text-xs"
+                        >
+                          {tag}
                         </Badge>
-                        <span className="text-sm text-gray-500">3 hours ago</span>
-                      </div>
-                      <p className="text-gray-700 text-sm">
-                        Thank you Sarah! Sustainability is definitely a key focus in modern fashion.
-                      </p>
+                      ))}
                     </div>
                   </div>
                 </div>
-
-                <div className="text-center mt-6">
-                  <Button variant="outline">Load More Comments</Button>
+                {/* Featured Image */}
+                <div className="relative h-96 md:h-[500px] rounded-lg overflow-hidden mb-8">
+                  <Image
+                    src={post.featuredImage || "/1.png"}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-              </div>
-            </div>
+                {/* Article Content */}
 
-            {/* Sidebar */}
-            <div className="lg:col-span-1">
-              {/* Related Posts */}
-              <Card className="p-6 mb-6">
-                <h4 className="font-bold mb-4">Related Posts</h4>
-                <div className="space-y-4">
-                  {relatedPosts.map((relatedPost) => (
-                    <Link key={relatedPost.id} href={`/blog/${relatedPost.id}`}>
-                      <div className="flex space-x-3 hover:bg-gray-50 p-2 rounded transition-colors">
-                        <Image
-                          src={relatedPost.image || "/placeholder.svg"}
-                          alt={relatedPost.title}
-                          width={60}
-                          height={60}
-                          className="rounded object-cover"
-                        />
+                <div className="grid lg:grid-cols-4 gap-8">
+                  <div className="lg:col-span-3">
+                    <div
+                      className="prose prose-lg max-w-none mb-12"
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    />
+
+                    {/* Author Bio */}
+                    <Card className="p-6 mb-8">
+                      <div className="flex items-start space-x-4">
+                        <Avatar className="h-16 w-16">
+                          <AvatarImage
+                            src={post.author.avatar || "/placeholder.svg"}
+                            alt={post.author.name}
+                          />
+                          <AvatarFallback>
+                            {post.author.name
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")}
+                          </AvatarFallback>
+                        </Avatar>
                         <div className="flex-1">
-                          <Badge className="text-xs mb-1" variant="secondary">
-                            {relatedPost.category}
-                          </Badge>
-                          <h5 className="font-semibold text-sm leading-tight mb-1">{relatedPost.title}</h5>
-                          <p className="text-xs text-gray-500">
-                            {relatedPost.author} • {relatedPost.publishedAt}
+                          <h3 className="font-bold text-lg mb-2">
+                            About {post.author.name}
+                          </h3>
+                          <p className="text-gray-600 mb-4">
+                            {post.author.bio}
                           </p>
+                          <div className="flex space-x-2">
+                            <Button variant="outline" size="sm">
+                              Follow
+                            </Button>
+                            <Button variant="outline" size="sm">
+                              <Twitter className="h-4 w-4" />
+                            </Button>
+                            <Button variant="outline" size="sm">
+                              <Instagram className="h-4 w-4" />
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </Link>
-                  ))}
-                </div>
-              </Card>
+                    </Card>
 
-              {/* Newsletter Signup */}
-              <Card className="p-6 mb-6 bg-gradient-to-br from-blue-50 to-purple-50">
-                <h4 className="font-bold mb-2">Stay Updated</h4>
-                <p className="text-sm text-gray-600 mb-4">Get the latest articles delivered to your inbox.</p>
-                <div className="space-y-2">
-                  <Input placeholder="Enter your email" type="email" />
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">Subscribe</Button>
-                </div>
-              </Card>
+                    {/* Comments Section */}
+                    <div className="mb-8">
+                      <h3 className="text-2xl font-bold mb-6 flex items-center">
+                        <MessageCircle className="h-6 w-6 mr-2" />
+                        Comments (12)
+                      </h3>
 
-              {/* Popular Tags */}
-              <Card className="p-6">
-                <h4 className="font-bold mb-4">Popular Tags</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["Fashion", "Beauty", "Lifestyle", "Health", "Travel", "Food", "Tech", "Gaming"].map((tag) => (
-                    <Badge key={tag} variant="outline" className="cursor-pointer hover:bg-gray-100">
-                      {tag}
-                    </Badge>
-                  ))}
+                      {/* Comment Form */}
+                      <Card className="p-6 mb-6">
+                        <h4 className="font-semibold mb-4">Leave a Comment</h4>
+                        <div className="space-y-4">
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <Input placeholder="Your Name" />
+                            <Input placeholder="Your Email" type="email" />
+                          </div>
+                          <Textarea
+                            placeholder="Write your comment here..."
+                            rows={4}
+                          />
+                          <Button className="bg-blue-600 hover:bg-blue-700">
+                            Post Comment
+                          </Button>
+                        </div>
+                      </Card>
+
+                      {/* Sample Comments */}
+                      <div className="space-y-6">
+                        <div className="flex space-x-4">
+                          <Avatar>
+                            <AvatarImage src="/placeholder.svg?height=40&width=40" />
+                            <AvatarFallback>JD</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-2 mb-2">
+                              <span className="font-semibold">John Doe</span>
+                              <span className="text-sm text-gray-500">
+                                2 hours ago
+                              </span>
+                            </div>
+                            <p className="text-gray-700 mb-2">
+                              Great article! I&apos;ve been struggling with my
+                              skincare routine and this really helped clarify
+                              things for me.
+                            </p>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-blue-600"
+                            >
+                              Reply
+                            </Button>
+                          </div>
+                        </div>
+
+                        <div className="flex space-x-4">
+                          <Avatar>
+                            <AvatarImage src="/placeholder.svg?height=40&width=40" />
+                            <AvatarFallback>SM</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-2 mb-2">
+                              <span className="font-semibold">
+                                Sarah Miller
+                              </span>
+                              <span className="text-sm text-gray-500">
+                                5 hours ago
+                              </span>
+                            </div>
+                            <p className="text-gray-700 mb-2">
+                              Love the sustainable fashion tips! It&apos;s so
+                              important to be mindful of our choices.
+                            </p>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-blue-600"
+                            >
+                              Reply
+                            </Button>
+                          </div>
+                        </div>
+
+                        <div className="flex space-x-4 ml-12">
+                          <Avatar className="h-8 w-8">
+                            <AvatarImage src="/placeholder.svg?height=32&width=32" />
+                            <AvatarFallback>RS</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-2 mb-2">
+                              <span className="font-semibold text-sm">
+                                Robert Sunmary
+                              </span>
+                              <Badge variant="secondary" className="text-xs">
+                                Author
+                              </Badge>
+                              <span className="text-sm text-gray-500">
+                                3 hours ago
+                              </span>
+                            </div>
+                            <p className="text-gray-700 text-sm">
+                              Thank you Sarah! Sustainability is definitely a
+                              key focus in modern fashion.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="text-center mt-6">
+                        <Button variant="outline">Load More Comments</Button>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-              </Card>
-            </div>
           </div>
+           {/* Sidebar */}
+           <Sidebar />
+           
         </div>
-      </div>
+  </div>
+
+   
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12 mt-16">
@@ -434,8 +477,8 @@ export default function BlogDetailsPage({ params }: { params: { id: string } }) 
           <div className="text-center mb-8">
             <h3 className="text-3xl font-bold mb-4">ZORIK</h3>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Welcome! Feel free to dive and match these infographics based on your interests and the preferences of
-              your target audience.
+              Welcome! Feel free to dive and match these infographics based on
+              your interests and the preferences of your target audience.
             </p>
           </div>
 
@@ -472,9 +515,11 @@ export default function BlogDetailsPage({ params }: { params: { id: string } }) 
             </Link>
           </div>
 
-          <div className="text-center text-gray-400 text-sm">© Copyright 2024 Zorik Design by EGENSLAB</div>
+          <div className="text-center text-gray-400 text-sm">
+            © Copyright 2024 Zorik Design by EGENSLAB
+          </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
